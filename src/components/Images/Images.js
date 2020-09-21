@@ -34,23 +34,13 @@ const Images = () => {
 		setSmeshariki(smeshariki.map(element => (element.id === id) && (element.blocked === false) ? { ...element, flipped: !element.flipped } : element))
 		setPara([...para, smeshariki[id - 1].name])
 	}
-	useEffect(() => {
-		if (para.length === 2 && para[0] === para[1]) {
-			// alert('пара');
 
-			setSmeshariki(smeshariki.map(element => element.name === para[0] ? { ...element, blocked: true } : element))
-			setPara([]);
+	const checkPara = () => {
 
+	};
 
-		} else if (para.length === 2 && para[0] !== para[1]) {
-			// alert('не пара');
-			// setPara([]);
-			setSmeshariki(smeshariki.map(element => (element.flipped === true) && (element.blocked === false) ? { ...element, flipped: false } : element))
-			setPara([]);
+	useEffect(checkPara, [para])
 
-		}
-
-	})
 
 	return (<div className={styles.smeshariki}>
 		{smeshariki
