@@ -31,12 +31,17 @@ const Images = () => {
 
 
 	const Flip = (id) => {
-		setSmeshariki(smeshariki.map(element => (element.id === id) && (element.blocked === false) ? { ...element, flipped: !element.flipped } : element))
+		setSmeshariki(smeshariki.map(element => (element.id === id) ? { ...element, flipped: !element.flipped } : element))
+
+
 		setPara([...para, smeshariki[id - 1].name])
+		console.log(smeshariki)
 	}
 
 	const checkPara = () => {
+		if (para.length === 2 && para[0] === para[1]) {
 
+		}
 	};
 
 	useEffect(checkPara, [para])
@@ -45,14 +50,20 @@ const Images = () => {
 	return (<div className={styles.smeshariki}>
 		{smeshariki
 			.map((element) => (
-				<div onClick={() => Flip(element.id)} className={styles.card} key={element.id}>
-					{element.flipped ? <img className={styles.frontFace} src={element.pic}></img> :
-						<img className={styles.backFace} src={Shirt}></img>}
+				<div onClick={() => Flip(element.id)} className={styles.card + ' ' + (element.flipped ? styles.flip : '')} key={element.id}>
+					<div className={styles.flipper} id='target'>
+						<div className={styles.frontFace}>
 
+							<img src={element.pic}></img>
+						</div>
+						<div className={styles.backFace}>
+							<img src={Shirt}></img>
+						</div>
+					</div>
 				</div>
 			)
 			)}
-	</div>
+	</div >
 
 	)
 }

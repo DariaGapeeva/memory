@@ -14,17 +14,36 @@
 	border: 3px solid grey;
 	border-radius: 5px;
 	position: relative;
+	perspective: 400px;
+	transform-style: preserve-3d;
+	transition: all 1s ease 0s;
 }
 
-.card:active {
+/* .card:active {
 	transform: scale(0.97);
 	transition: transform 0.2s;
-}
+} */
 .frontFace,
 .backFace {
 	width: 100%;
 	height: 100%;
-
+	top: 0;
+	left: 0;
+	display: block;
 	position: absolute;
 	border-radius: 5px;
+	backface-visibility: hidden;
+}
+
+.frontFace {
+	transform: rotateY(-180deg);
+}
+
+.backFace {
+	transform: rotateY(0deg);
+	z-index: 2;
+}
+
+.card.flip {
+	transform: rotateY(-180deg);
 }
