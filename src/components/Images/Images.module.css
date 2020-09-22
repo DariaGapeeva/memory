@@ -1,9 +1,14 @@
+.title {
+	margin: 50px auto;
+	font-size: 26px;
+}
+
 .smeshariki {
 	width: 500px;
 	height: 600px;
 	display: flex;
 	flex-wrap: wrap;
-	margin: 100px auto;
+	margin: 50px auto;
 	/* border: 3px solid grey; */
 }
 

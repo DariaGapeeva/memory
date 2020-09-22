@@ -26,12 +26,14 @@ const Images = () => {
 	]
 	const [para, setPara] = useState([])
 
+	const [counter, setCounter] = useState(0)
+
 	const [smeshariki, setSmeshariki] = useState(initialSmeshariki)
 
 
 
 	const Flip = (id) => {
-		setSmeshariki(smeshariki.map(element => (element.id === id) ? { ...element, flipped: !element.flipped } : element))
+		setSmeshariki(smeshariki.map(element => (element.id === id && !element.blocked) ? { ...element, flipped: !element.flipped } : element))
 
 
 		setPara([...para, smeshariki[id - 1].name])
@@ -40,31 +42,42 @@ const Images = () => {
 
 	const checkPara = () => {
 		if (para.length === 2 && para[0] === para[1]) {
+			setCounter(counter + 1);
+			setSmeshariki(smeshariki.map(element => (element.name === para[0]) ? { ...element, blocked: true } : element))
 
+			setPara([]);
+
+		} else if (para.length === 2 && para[0] !== para[1]) {
+			smeshariki.map(element => (element.name === para[0] && element.flipped) ? Flip(element.id) : element);
+			smeshariki.map(element => (element.name === para[1] && element.flipped) ? Flip(element.id) : element);
+			setPara([])
 		}
 	};
 
 	useEffect(checkPara, [para])
 
 
-	return (<div className={styles.smeshariki}>
-		{smeshariki
-			.map((element) => (
-				<div onClick={() => Flip(element.id)} className={styles.card + ' ' + (element.flipped ? styles.flip : '')} key={element.id}>
-					<div className={styles.flipper} id='target'>
-						<div className={styles.frontFace}>
+	return (
+		<div>
+			<div className={styles.title}>  Счётчик: {counter} </div>
+			<div className={styles.smeshariki}>
+				{smeshariki
+					.map((element) => (
+						<div onClick={() => Flip(element.id)} className={styles.card + ' ' + (element.flipped ? styles.flip : '')} key={element.id}>
+							<div className={styles.flipper} id='target'>
+								<div className={styles.frontFace}>
 
-							<img src={element.pic}></img>
+									<img src={element.pic}></img>
+								</div>
+								<div className={styles.backFace}>
+									<img src={Shirt}></img>
+								</div>
+							</div>
 						</div>
-						<div className={styles.backFace}>
-							<img src={Shirt}></img>
-						</div>
-					</div>
-				</div>
-			)
-			)}
-	</div >
-
+					)
+					)}
+			</div >
+		</div>
 	)
 }
 
