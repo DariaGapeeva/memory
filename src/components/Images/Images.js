@@ -30,10 +30,7 @@ const Images = () => {
 	]
 	const [para, setPara] = useState([])
 	const [paraId, setParaId] = useState([])
-
-
 	const [counter, setCounter] = useState(0)
-
 	const [smeshariki, setSmeshariki] = useState(() => calculate(initialSmeshariki))
 
 
@@ -43,29 +40,21 @@ const Images = () => {
 		let smesharik = smeshariki.find(item => item.id === id);
 		setPara(!smesharik.flipped && !smesharik.blocked ? [...para, smesharik.name] : para);
 		setParaId(!smesharik.flipped && !smesharik.blocked ? [...paraId, id] : paraId);
-
-
-
 		console.log(smeshariki)
 		console.log(paraId)
-
 		console.log(para)
 	}
 
 	const checkPara = () => {
+		let smesharik = smeshariki.find(item => item.id === paraId[0]);
 		if (para.length === 2 && para[0] === para[1] && paraId[0] !== paraId[1]) {
 			setCounter(counter + 1);
 			setSmeshariki(smeshariki.map(element => (element.name === para[0]) ? { ...element, blocked: true } : element));
 			setPara([]);
 			setParaId([]);
 
-			// } else if (para.length === 2 && para[0] === para[1] && paraId[0] === paraId[1]) {
-			// 	setPara([]);
-			// 	setParaId([]);
-
 		} else if (para.length === 2 && para[0] !== para[1]) {
 			setTimeout(() => {
-
 				smeshariki.map(element => (element.name === para[0] && element.flipped) ? Flip(element.id) : element);
 				smeshariki.map(element => (element.name === para[1] && element.flipped) ? Flip(element.id) : element);
 			}, 1000);
@@ -74,29 +63,40 @@ const Images = () => {
 		} else if (para.length >= 2 || paraId.length >= 2) {
 			setPara([]);
 			setParaId([]);
+		} else if (para.length === 1 && !smesharik.flipped) {
+			setPara([]);
+			setParaId([]);
 		}
 	};
 
-	useEffect(checkPara, [para, paraId])
+	const getStart = () => {
+		setSmeshariki(() => calculate(initialSmeshariki));
+		setCounter(0);
+		setPara([]);
+		setParaId([]);
+	}
+	useEffect(checkPara, [smeshariki, para, paraId])
 
 
 	return (
 		<div>
-			<div className={styles.title}>  Счётчик: {counter} </div>
+			<div className={styles.header}>
+				<div className={styles.title}>  Counter: {counter} </div>
+				<button className={styles.button} onClick={getStart}> Start </button>
+			</div>
 			<div className={styles.smeshariki}>
 				{smeshariki
 					.map((element) => (
 						<div onClick={() => Flip(element.id)} className={styles.card + ' ' + (element.flipped ? styles.flip : '')} key={element.id}>
-							<div className={styles.flipper} id='target'>
-								<div className={styles.frontFace}>
 
-									<img src={element.pic}></img>
-								</div>
-								<div className={styles.backFace}>
-									<img src={Shirt}></img>
-								</div>
+							<div className={styles.frontFace}>
+								<img src={element.pic}></img>
+							</div>
+							<div className={styles.backFace}>
+								<img src={Shirt}></img>
 							</div>
 						</div>
+
 					)
 					)}
 			</div >
