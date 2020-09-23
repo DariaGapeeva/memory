@@ -25,6 +25,8 @@ const Images = () => {
 		{ id: 12, name: 'Yogik', pic: Yogik, flipped: false, blocked: false }
 	]
 	const [para, setPara] = useState([])
+	const [paraId, setParaId] = useState([])
+
 
 	const [counter, setCounter] = useState(0)
 
@@ -33,28 +35,44 @@ const Images = () => {
 
 
 	const Flip = (id) => {
-		setSmeshariki(smeshariki.map(element => (element.id === id && !element.blocked) ? { ...element, flipped: !element.flipped } : element))
+		setSmeshariki(smeshariki.map(element => (element.id === id && !element.blocked) ? { ...element, flipped: !element.flipped } : element));
+		setPara(!smeshariki[id - 1].flipped ? [...para, smeshariki[id - 1].name] : para);
+		setParaId([...paraId, id])
 
 
-		setPara([...para, smeshariki[id - 1].name])
 		console.log(smeshariki)
+		console.log(paraId)
+
+		console.log(para)
 	}
 
 	const checkPara = () => {
-		if (para.length === 2 && para[0] === para[1]) {
+		if (para.length === 2 && para[0] === para[1] && !smeshariki[paraId[0] - 1].blocked && !smeshariki[paraId[1] - 1].blocked && paraId[0] !== paraId[1]) {
 			setCounter(counter + 1);
-			setSmeshariki(smeshariki.map(element => (element.name === para[0]) ? { ...element, blocked: true } : element))
-
+			setSmeshariki(smeshariki.map(element => (element.name === para[0]) ? { ...element, blocked: true } : element));
 			setPara([]);
+			setParaId([]);
+
+
+		} else if (para.length === 2 && para[0] === para[1] && !smeshariki[paraId[0] - 1].blocked && !smeshariki[paraId[1] - 1].blocked && paraId[0] === paraId[1]) {
+			setPara([]);
+			setParaId([]);
 
 		} else if (para.length === 2 && para[0] !== para[1]) {
-			smeshariki.map(element => (element.name === para[0] && element.flipped) ? Flip(element.id) : element);
-			smeshariki.map(element => (element.name === para[1] && element.flipped) ? Flip(element.id) : element);
-			setPara([])
+			setTimeout(() => {
+
+				smeshariki.map(element => (element.name === para[0] && element.flipped) ? Flip(element.id) : element);
+				smeshariki.map(element => (element.name === para[1] && element.flipped) ? Flip(element.id) : element);
+			}, 1000);
+			setPara([]);
+			setParaId([]);
+		} else if (para.length >= 2 || paraId.length >= 2) {
+			setPara([]);
+			setParaId([]);
 		}
 	};
 
-	useEffect(checkPara, [para])
+	useEffect(checkPara, [para, paraId])
 
 
 	return (
