@@ -8,6 +8,10 @@ import Yogik from '../../img/yogik.png';
 import styles from './Images.module.css';
 import Shirt from '../../img/shirt.png'
 
+const calculate = (array) => {
+	return array.sort(() => Math.random() - 0.5);
+}
+
 const Images = () => {
 
 	const initialSmeshariki = [
@@ -30,14 +34,16 @@ const Images = () => {
 
 	const [counter, setCounter] = useState(0)
 
-	const [smeshariki, setSmeshariki] = useState(initialSmeshariki)
+	const [smeshariki, setSmeshariki] = useState(() => calculate(initialSmeshariki))
 
 
 
 	const Flip = (id) => {
 		setSmeshariki(smeshariki.map(element => (element.id === id && !element.blocked) ? { ...element, flipped: !element.flipped } : element));
-		setPara(!smeshariki[id - 1].flipped ? [...para, smeshariki[id - 1].name] : para);
-		setParaId([...paraId, id])
+		let smesharik = smeshariki.find(item => item.id === id);
+		setPara(!smesharik.flipped && !smesharik.blocked ? [...para, smesharik.name] : para);
+		setParaId(!smesharik.flipped && !smesharik.blocked ? [...paraId, id] : paraId);
+
 
 
 		console.log(smeshariki)
@@ -47,16 +53,15 @@ const Images = () => {
 	}
 
 	const checkPara = () => {
-		if (para.length === 2 && para[0] === para[1] && !smeshariki[paraId[0] - 1].blocked && !smeshariki[paraId[1] - 1].blocked && paraId[0] !== paraId[1]) {
+		if (para.length === 2 && para[0] === para[1] && paraId[0] !== paraId[1]) {
 			setCounter(counter + 1);
 			setSmeshariki(smeshariki.map(element => (element.name === para[0]) ? { ...element, blocked: true } : element));
 			setPara([]);
 			setParaId([]);
 
-
-		} else if (para.length === 2 && para[0] === para[1] && !smeshariki[paraId[0] - 1].blocked && !smeshariki[paraId[1] - 1].blocked && paraId[0] === paraId[1]) {
-			setPara([]);
-			setParaId([]);
+			// } else if (para.length === 2 && para[0] === para[1] && paraId[0] === paraId[1]) {
+			// 	setPara([]);
+			// 	setParaId([]);
 
 		} else if (para.length === 2 && para[0] !== para[1]) {
 			setTimeout(() => {
