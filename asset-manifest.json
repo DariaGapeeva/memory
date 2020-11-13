@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/social/static/css/main.6b0e4e25.chunk.css",
+    "main.js": "/social/static/js/main.73b001f5.chunk.js",
+    "main.js.map": "/social/static/js/main.73b001f5.chunk.js.map",
+    "runtime-main.js": "/social/static/js/runtime-main.7b1513a5.js",
+    "runtime-main.js.map": "/social/static/js/runtime-main.7b1513a5.js.map",
+    "static/js/2.cf368e2b.chunk.js": "/social/static/js/2.cf368e2b.chunk.js",
+    "static/js/2.cf368e2b.chunk.js.map": "/social/static/js/2.cf368e2b.chunk.js.map",
+    "index.html": "/social/index.html",
+    "precache-manifest.9fee0c1940c7e8faecce07eb03f076de.js": "/social/precache-manifest.9fee0c1940c7e8faecce07eb03f076de.js",
+    "service-worker.js": "/social/service-worker.js",
+    "static/css/main.6b0e4e25.chunk.css.map": "/social/static/css/main.6b0e4e25.chunk.css.map",
+    "static/js/2.cf368e2b.chunk.js.LICENSE.txt": "/social/static/js/2.cf368e2b.chunk.js.LICENSE.txt",
+    "static/media/barash.png": "/social/static/media/barash.da532ca8.png",
+    "static/media/crosh.png": "/social/static/media/crosh.30e35600.png",
+    "static/media/nyusha.png": "/social/static/media/nyusha.b7f5551f.png",
+    "static/media/pandochka.png": "/social/static/media/pandochka.2b6972c2.png",
+    "static/media/pin.png": "/social/static/media/pin.d6eb58e5.png",
+    "static/media/yogik.png": "/social/static/media/yogik.1e6254a9.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7b1513a5.js",
+    "static/js/2.cf368e2b.chunk.js",
+    "static/css/main.6b0e4e25.chunk.css",
+    "static/js/main.73b001f5.chunk.js"
+  ]
+}
