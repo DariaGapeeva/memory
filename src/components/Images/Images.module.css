@@ -1,3 +1,6 @@
+.container {
+  padding: 0px 10px 0px 10px;
+}
 .header {
   margin: 30px auto;
   width: 200px;
@@ -19,6 +22,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 50px auto;
+  justify-content: space-around;
 }
 
 .card {
@@ -44,6 +48,10 @@
   border-radius: 5px;
   backface-visibility: hidden;
 }
+.frontFace img,
+.backFace img {
+  object-fit: contain;
+}
 
 .frontFace {
   transform: rotateY(-180deg);
@@ -56,4 +64,19 @@
 
 .card.flip {
   transform: rotateY(-180deg);
+}
+
+@media (max-width: 600px) {
+  .smeshariki {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .card {
+    flex: 1 1 30%;
+    width: 30%;
+    height: auto;
+  }
 }

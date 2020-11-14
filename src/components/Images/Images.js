@@ -144,7 +144,7 @@ const Images = () => {
   useEffect(checkPara, [smeshariki, para, paraId]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.title}> Counter: {counter} </div>
         <button className={styles.button} onClick={getStart}>
