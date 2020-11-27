@@ -1,147 +1,124 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Barash from "../../img/barash.png";
 import Crosh from "../../img/crosh.png";
 import Nyusha from "../../img/nyusha.png";
-import Pandochka from "../../img/pandochka.png";
+import Panda from "../../img/pandochka.png";
 import Pin from "../../img/pin.png";
 import Yogik from "../../img/yogik.png";
 import styles from "./Images.module.css";
 import Shirt from "../../img/shirt.png";
 
-// import Iskorka from "../../img/pony/iskorka.jpg";
-// import Iskorka1 from "../../img/pony/iskorka1.jpg";
-// import Minty from "../../img/pony/Minty.jpg";
-// import Pinkipai from "../../img/pony/pinkipai.jpg";
-// import Wiki from "../../img/pony/wiki.jpg";
-// import Yellow from "../../img/pony/yellow.jpg";
-
 const calculate = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
 
-const Images = () => {
-  // const initialSmeshariki = [
-  // 	{ id: 1, name: 'Iskorka', pic: Iskorka, flipped: false, blocked: false },
-  // 	{ id: 2, name: 'Iskorka', pic: Iskorka, flipped: false, blocked: false },
-  // 	{ id: 3, name: 'Iskorka1', pic: Iskorka1, flipped: false, blocked: false },
-  // 	{ id: 4, name: 'Iskorka1', pic: Iskorka1, flipped: false, blocked: false },
-  // 	{ id: 5, name: 'Minty', pic: Minty, flipped: false, blocked: false },
-  // 	{ id: 6, name: 'Minty', pic: Minty, flipped: false, blocked: false },
-  // 	{ id: 7, name: 'Pinkipai', pic: Pinkipai, flipped: false, blocked: false },
-  // 	{ id: 8, name: 'Pinkipai', pic: Pinkipai, flipped: false, blocked: false },
-  // 	{ id: 9, name: 'Wiki', pic: Wiki, flipped: false, blocked: false },
-  // 	{ id: 10, name: 'Wiki', pic: Wiki, flipped: false, blocked: false },
-  // 	{ id: 11, name: 'Yellow', pic: Yellow, flipped: false, blocked: false },
-  // 	{ id: 12, name: 'Yellow', pic: Yellow, flipped: false, blocked: false },
-  // 	{ id: 13, name: 'Barash', pic: Barash, flipped: false, blocked: false },
-  // 	{ id: 14, name: 'Crosh', pic: Crosh, flipped: false, blocked: false },
-  // 	{ id: 15, name: 'Nyusha', pic: Nyusha, flipped: false, blocked: false },
-  // 	{ id: 16, name: 'Pandochka', pic: Pandochka, flipped: false, blocked: false },
-  // 	{ id: 17, name: 'Pin', pic: Pin, flipped: false, blocked: false },
-  // 	{ id: 18, name: 'Yogik', pic: Yogik, flipped: false, blocked: false },
-  // 	{ id: 19, name: 'Barash', pic: Barash, flipped: false, blocked: false },
-  // 	{ id: 20, name: 'Crosh', pic: Crosh, flipped: false, blocked: false },
-  // 	{ id: 21, name: 'Nyusha', pic: Nyusha, flipped: false, blocked: false },
-  // 	{ id: 22, name: 'Pandochka', pic: Pandochka, flipped: false, blocked: false },
-  // 	{ id: 23, name: 'Pin', pic: Pin, flipped: false, blocked: false },
-  // 	{ id: 24, name: 'Yogik', pic: Yogik, flipped: false, blocked: false }
-  // ]
+class StateOne {
+  constructor(id) {
+    this.one = id;
+  }
+}
 
+class StateTwo {
+  constructor(id1, id2) {
+    this.one = id1;
+    this.two = id2;
+  }
+}
+
+const Images = () => {
   const initialSmeshariki = [
-    { id: 1, name: "Barash", pic: Barash, flipped: false, blocked: false },
-    { id: 2, name: "Crosh", pic: Crosh, flipped: false, blocked: false },
-    { id: 3, name: "Nyusha", pic: Nyusha, flipped: false, blocked: false },
-    {
-      id: 4,
-      name: "Pandochka",
-      pic: Pandochka,
-      flipped: false,
-      blocked: false,
-    },
-    { id: 5, name: "Pin", pic: Pin, flipped: false, blocked: false },
-    { id: 6, name: "Yogik", pic: Yogik, flipped: false, blocked: false },
-    { id: 7, name: "Barash", pic: Barash, flipped: false, blocked: false },
-    { id: 8, name: "Crosh", pic: Crosh, flipped: false, blocked: false },
-    { id: 9, name: "Nyusha", pic: Nyusha, flipped: false, blocked: false },
-    {
-      id: 10,
-      name: "Pandochka",
-      pic: Pandochka,
-      flipped: false,
-      blocked: false,
-    },
-    { id: 11, name: "Pin", pic: Pin, flipped: false, blocked: false },
-    { id: 12, name: "Yogik", pic: Yogik, flipped: false, blocked: false },
+    { id: 1, name: "Barash", pic: Barash, flipped: false },
+    { id: 2, name: "Crosh", pic: Crosh, flipped: false },
+    { id: 3, name: "Nyusha", pic: Nyusha, flipped: false },
+    { id: 4, name: "Panda", pic: Panda, flipped: false },
+    { id: 5, name: "Pin", pic: Pin, flipped: false },
+    { id: 6, name: "Yogik", pic: Yogik, flipped: false },
+    { id: 7, name: "Barash", pic: Barash, flipped: false },
+    { id: 8, name: "Crosh", pic: Crosh, flipped: false },
+    { id: 9, name: "Nyusha", pic: Nyusha, flipped: false },
+    { id: 10, name: "Panda", pic: Panda, flipped: false },
+    { id: 11, name: "Pin", pic: Pin, flipped: false },
+    { id: 12, name: "Yogik", pic: Yogik, flipped: false },
   ];
 
-  const [para, setPara] = useState([]);
-  const [paraId, setParaId] = useState([]);
-  const [counter, setCounter] = useState(0);
   const [smeshariki, setSmeshariki] = useState(() =>
     calculate(initialSmeshariki)
   );
+  const blockedCard = useRef([]);
+  const [counter, setCounter] = useState(0);
+  const [state, setState] = useState({});
 
+  function isEmpty(obj) {
+    for (let key in obj) {
+      return false;
+    }
+    return true;
+  }
   const Flip = (id) => {
-    setSmeshariki(
-      smeshariki.map((element) =>
-        element.id === id && !element.blocked
-          ? { ...element, flipped: !element.flipped }
-          : element
-      )
-    );
-    let smesharik = smeshariki.find((item) => item.id === id);
-    setPara(
-      !smesharik.flipped && !smesharik.blocked
-        ? [...para, smesharik.name]
-        : para
-    );
-    setParaId(
-      !smesharik.flipped && !smesharik.blocked ? [...paraId, id] : paraId
-    );
+    if (!blockedCard.current.includes(id)) {
+      if (isEmpty(state)) {
+        setState(new StateOne(id));
+
+        setSmeshariki(
+          smeshariki.map((element) =>
+            element.id === id
+              ? { ...element, flipped: !element.flipped }
+              : element
+          )
+        );
+      } else if (state instanceof StateOne) {
+        setState(new StateTwo(state.one, id));
+
+        setSmeshariki(
+          smeshariki.map((element) =>
+            element.id === id
+              ? { ...element, flipped: !element.flipped }
+              : element
+          )
+        );
+      }
+    }
   };
 
-  const checkPara = () => {
-    let smesharik = smeshariki.find((item) => item.id === paraId[0]);
-    if (para.length === 2 && para[0] === para[1] && paraId[0] !== paraId[1]) {
-      setCounter(counter + 1);
-      setSmeshariki(
-        smeshariki.map((element) =>
-          element.name === para[0] ? { ...element, blocked: true } : element
-        )
-      );
-      setPara([]);
-      setParaId([]);
-    } else if (para.length === 2 && para[0] !== para[1]) {
-      setTimeout(() => {
-        smeshariki.map((element) =>
-          element.name === para[0] && element.flipped
-            ? Flip(element.id)
-            : element
-        );
-        smeshariki.map((element) =>
-          element.name === para[1] && element.flipped
-            ? Flip(element.id)
-            : element
-        );
-      }, 1000);
-      setPara([]);
-      setParaId([]);
-    } else if (para.length >= 2 || paraId.length >= 2) {
-      setPara([]);
-      setParaId([]);
-    } else if (para.length === 1 && !smesharik.flipped) {
-      setPara([]);
-      setParaId([]);
+  const followState = () => {
+    if (state instanceof StateTwo) {
+      let card1 = smeshariki.find((item) => item.id === state.one);
+      let card2 = smeshariki.find((item) => item.id === state.two);
+      if (state.one === state.two) {
+        setState({});
+      } else if (state.one !== state.two && card1.flipped && card2.flipped) {
+        if (card1.name === card2.name) {
+          setCounter(counter + 1);
+          blockedCard.current.splice(
+            blockedCard.length - 1,
+            0,
+            state.one,
+            state.two
+          );
+          setState({});
+        } else if (card1.name !== card2.name) {
+          setTimeout(() => {
+            setSmeshariki(
+              smeshariki.map((element) =>
+                element.id === state.one || element.id === state.two
+                  ? { ...element, flipped: false }
+                  : element
+              )
+            );
+            setState({});
+          }, 1000);
+        }
+      }
     }
   };
 
   const getStart = () => {
     setSmeshariki(() => calculate(initialSmeshariki));
     setCounter(0);
-    setPara([]);
-    setParaId([]);
+    setState({});
+    blockedCard.current = [];
   };
-  useEffect(checkPara, [smeshariki, para, paraId]);
+  useEffect(followState, [state]);
 
   return (
     <div className={styles.container}>
